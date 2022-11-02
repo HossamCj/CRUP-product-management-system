@@ -23,7 +23,7 @@ function getTotal() {
     }
 }
 
-// Create product
+// Checking if the localStorage has a products or not !
 let productData
 
 if (localStorage.product != null) {
@@ -32,7 +32,7 @@ if (localStorage.product != null) {
     productData = []
 }
 
-// Save products to the localStorage
+// Create Product Save products to the localStorage
 submit.onclick = function() {
     let newProduct = {
         title: title.value,
@@ -48,6 +48,8 @@ submit.onclick = function() {
     localStorage.setItem('product', JSON.stringify(productData))
 
     clearInputs()
+    readData()
+
 }
 
 // Clear inputs
@@ -62,10 +64,37 @@ function clearInputs() {
     category.value = ''
 }
 
-
-
-
 // Read 
+function readData() {
+    let table = ''
+
+    for (let i = 0; i < productData.length; i++) {
+        table += `
+            <tr>
+                <td>${i}</td>
+                <td>${productData[i].title}</td>
+                <td>${productData[i].price}</td>
+                <td>${productData[i].taxes}</td>
+                <td>${productData[i].ads}</td>
+                <td>${productData[i].discount}</td>
+                <td>${productData[i].total}</td>
+                <td>${productData[i].category}</td>
+                <td>
+                    <button id="update">update</button>
+                </td>
+                <td>
+                    <button id="delete">delete</button>
+                </td>
+            </tr>
+        `
+    }
+    
+    document.getElementById('tbody').innerHTML = table
+}
+
+readData()
+
+
 // Count 
 // Update
 // Delete
