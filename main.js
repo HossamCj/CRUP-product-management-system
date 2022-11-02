@@ -24,7 +24,6 @@ function getTotal() {
 }
 
 // Create product
-
 let productData
 
 if (localStorage.product != null) {
@@ -33,6 +32,7 @@ if (localStorage.product != null) {
     productData = []
 }
 
+// Save products to the localStorage
 submit.onclick = function() {
     let newProduct = {
         title: title.value,
@@ -46,15 +46,25 @@ submit.onclick = function() {
     }
     productData.push(newProduct)
     localStorage.setItem('product', JSON.stringify(productData))
-    console.log(productData)
+
+    clearInputs()
+}
+
+// Clear inputs
+function clearInputs() {
+    title.value = ''
+    price.value = ''
+    taxes.value = ''
+    ads.value = ''
+    discount.value = ''
+    total.innerHTML = ''
+    count.value = ''
+    category.value = ''
 }
 
 
 
 
-
-// Save products to the localStorage
-// Clear inputs
 // Read 
 // Count 
 // Update
