@@ -83,7 +83,13 @@ function readData() {
                     <button id="update">update</button>
                 </td>
                 <td>
-                    <button id="delete">delete</button>
+                    <button 
+                        onClick="deleteProduct(${i})"
+                        id="delete"
+                        class="delete"
+                        >
+                            delete
+                    </button>
                 </td>
             </tr>
         `
@@ -94,10 +100,15 @@ function readData() {
 
 readData()
 
+// Delete one product
+function deleteProduct(index) {
+    productData.splice(index, 1)
+    localStorage.product = JSON.stringify(productData)
+    readData()
+}
 
 // Count 
 // Update
-// Delete
 // Search
 // Clean data
 

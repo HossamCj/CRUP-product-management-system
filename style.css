@@ -85,6 +85,16 @@ button:hover {
 
 }
 
+#searchTitle {
+    background-color: rgb(84, 43, 134)
+}
+
+#SearchCategory {
+    background-color:rgb(69, 48, 189);
+    color: #FFF;
+    /* font-weight: bold; */
+}
+
 table {
     width: 100%;
     text-align: center;
@@ -103,4 +113,16 @@ th, td {
 td {
     border: 1px solid #451;
     margin: 5px 0;
+}
+
+td button {
+    text-transform: capitalize;
+}
+
+.delete {
+    background-color: rgb(125, 57, 57)
+}
+
+.delete:hover {
+    background-color: rgb(125, 57, 57)
 }
