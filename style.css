@@ -95,6 +95,16 @@ button:hover {
     /* font-weight: bold; */
 }
 
+#deleteAll {
+    margin: 20px 0;
+}
+
+#deleteAll button {
+    background-color:rgb(125, 57, 57);
+    font-weight: bold;
+}
+
+
 table {
     width: 100%;
     text-align: center;

@@ -96,6 +96,17 @@ function readData() {
     }
     
     document.getElementById('tbody').innerHTML = table
+
+    const btnDeleteAll = document.getElementById('deleteAll')
+    if (productData.length > 0 ) {
+        btnDeleteAll.innerHTML = `
+            <button onClick='deleteAll()'>
+                Delete All
+            </button>
+        `
+    } else {
+        btnDeleteAll.innerHTML = ''
+    }
 }
 
 readData()
@@ -104,6 +115,13 @@ readData()
 function deleteProduct(index) {
     productData.splice(index, 1)
     localStorage.product = JSON.stringify(productData)
+    readData()
+}
+
+// Delete all products
+function deleteAll() {
+    localStorage.clear()
+    productData.splice(0)
     readData()
 }
 
