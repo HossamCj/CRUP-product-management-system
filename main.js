@@ -181,8 +181,111 @@ function updateData(i) {
 
 }
 
-
-
 // Search
+let searchMood = 'title'
+
+function getSearchMood(id) {
+
+    let search = document.getElementById('search')
+    
+    if (id == 'searchTitle') {
+        searchMood = 'title'
+        search.placeholder = 'Search by Title'
+    } else {
+        searchMood = 'category'
+        search.placeholder = 'Search by Category'
+    }
+
+    search.focus()
+    search.value = ''
+    readData()
+}
+
+function searchData(value) {
+    let table = ''
+    
+    if (searchMood == 'title') {
+        
+        for (let i = 0; i < productData.length; i++) {
+
+            if (productData[i].title.toLowerCase().includes(value.toLowerCase())) {
+
+                table += `
+                    <tr>
+                        <td>${i}</td>
+                        <td>${productData[i].title}</td>
+                        <td>${productData[i].price}</td>
+                        <td>${productData[i].taxes}</td>
+                        <td>${productData[i].ads}</td>
+                        <td>${productData[i].discount}</td>
+                        <td>${productData[i].total}</td>
+                        <td>${productData[i].category}</td>
+                        <td>
+                            <button
+                                onClick="updateData(${i})"
+                                id="update"
+                                >
+                                    update
+                            </button>
+                        </td>
+                        <td>
+                            <button 
+                                onClick="deleteProduct(${i})"
+                                id="delete"
+                                class="delete"
+                                >
+                                    delete
+                            </button>
+                        </td>
+                    </tr>
+                `
+            }
+        }
+        
+    } else {
+        for (let i = 0; i < productData.length; i++) {
+                    
+            if (productData[i].category.toLowerCase().includes(value.toLowerCase())) {
+
+                table += `
+                    <tr>
+                        <td>${i}</td>
+                        <td>${productData[i].title}</td>
+                        <td>${productData[i].price}</td>
+                        <td>${productData[i].taxes}</td>
+                        <td>${productData[i].ads}</td>
+                        <td>${productData[i].discount}</td>
+                        <td>${productData[i].total}</td>
+                        <td>${productData[i].category}</td>
+                        <td>
+                            <button
+                                onClick="updateData(${i})"
+                                id="update"
+                                >
+                                    update
+                            </button>
+                        </td>
+                        <td>
+                            <button 
+                                onClick="deleteProduct(${i})"
+                                id="delete"
+                                class="delete"
+                                >
+                                    delete
+                            </button>
+                        </td>
+                    </tr>
+                `
+            }
+        }
+    }
+
+    document.getElementById('tbody').innerHTML = table
+    
+}
+
+
+
+
 // Clean data
 
