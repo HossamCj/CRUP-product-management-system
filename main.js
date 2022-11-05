@@ -15,7 +15,7 @@ function getTotal() {
     if (price.value != '') {
         let result = 
             (+price.value + +taxes.value + +ads.value) - +discount.value
-        total.innerHTML = result
+        total.textContent = ': ' + result
         total.style.background = '#040'
     } else {
         total.innerHTML = ''
@@ -32,7 +32,7 @@ if (localStorage.product != null) {
     productData = []
 }
 
-// Create Product Save products to the localStorage
+// Create Product 
 submit.onclick = function() {
     let newProduct = {
         title: title.value,
@@ -44,7 +44,16 @@ submit.onclick = function() {
         count: count.value,
         category: category.value
     }
-    productData.push(newProduct)
+
+    if (newProduct.count > 1) {
+        for (let i = 0; i < newProduct.count; i++) {
+            productData.push(newProduct)
+        }
+    } else {
+        productData.push(newProduct)
+    }
+
+    // Save products to the localStorage
     localStorage.setItem('product', JSON.stringify(productData))
 
     clearInputs()
@@ -64,7 +73,7 @@ function clearInputs() {
     category.value = ''
 }
 
-// Read 
+// Read Outputs
 function readData() {
     let table = ''
 
@@ -101,7 +110,7 @@ function readData() {
     if (productData.length > 0 ) {
         btnDeleteAll.innerHTML = `
             <button onClick='deleteAll()'>
-                Delete All
+                Delete All (${productData.length})
             </button>
         `
     } else {
@@ -125,7 +134,9 @@ function deleteAll() {
     readData()
 }
 
-// Count 
+// Count === The number of the products in the stock
+
+
 // Update
 // Search
 // Clean data
