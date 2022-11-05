@@ -8,6 +8,8 @@ let count = document.getElementById('count')
 let category = document.getElementById('category')
 let submit = document.getElementById('submit')
 
+let submitMood = 'create'
+let tmp
 
 
 // Get total
@@ -15,7 +17,7 @@ function getTotal() {
     if (price.value != '') {
         let result = 
             (+price.value + +taxes.value + +ads.value) - +discount.value
-        total.textContent = ': ' + result
+        total.textContent = ' ' + result
         total.style.background = '#040'
     } else {
         total.innerHTML = ''
@@ -44,13 +46,23 @@ submit.onclick = function() {
         count: count.value,
         category: category.value
     }
-
-    if (newProduct.count > 1) {
-        for (let i = 0; i < newProduct.count; i++) {
+    
+    if (submitMood === 'create') {
+        // Count === The number of the products in the stock
+        if (newProduct.count > 1) {
+            for (let i = 0; i < newProduct.count; i++) {
+                productData.push(newProduct)
+            }
+        } else {
             productData.push(newProduct)
         }
     } else {
-        productData.push(newProduct)
+        productData[tmp] = newProduct
+        submitMood = 'create'
+        submit.textContent = 'Create'
+        submit.style.backgroundColor = '#451'
+        count.style.display = 'block'
+
     }
 
     // Save products to the localStorage
@@ -77,6 +89,8 @@ function clearInputs() {
 function readData() {
     let table = ''
 
+    getTotal()
+    
     for (let i = 0; i < productData.length; i++) {
         table += `
             <tr>
@@ -89,7 +103,12 @@ function readData() {
                 <td>${productData[i].total}</td>
                 <td>${productData[i].category}</td>
                 <td>
-                    <button id="update">update</button>
+                    <button
+                        onClick="updateData(${i})"
+                        id="update"
+                        >
+                            update
+                    </button>
                 </td>
                 <td>
                     <button 
@@ -134,10 +153,36 @@ function deleteAll() {
     readData()
 }
 
-// Count === The number of the products in the stock
-
 
 // Update
+function updateData(i) {
+     title.value = productData[i].title
+     price.value = productData[i].price
+     taxes.value = productData[i].taxes
+     ads.value = productData[i].ads
+     discount.value = productData[i].discount
+     category.value = productData[i].category
+
+     submit.textContent = 'Update'
+     count.style.display = 'none'
+     submit.style.background = 'dodgerblue'
+
+     getTotal()
+
+    submitMood = 'update'
+    tmp = i
+
+    scroll({
+        top: 0,
+        behavior: 'smooth'
+    })
+
+
+
+}
+
+
+
 // Search
 // Clean data
 
